@@ -132,6 +132,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\LanguagesDAL.cs" />
+    <Compile Include="DAL\LanguagesXMLDAL.cs" />
     <Compile Include="DAL\LocalDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\LocalDB.mdf" />
+    <Content Include="App_Data\LocalDB.xml" />
     <Content Include="App_Data\LocalDB_log.ldf">
       <DependentUpon>LocalDB.mdf</DependentUpon>
     </Content>

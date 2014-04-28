@@ -48,12 +48,20 @@
 		// Reversing button ajax post
 		$("#reverseButton").click(function() {
 			$.post
-			("@Url.Action("ReverseText","Home")"
-				, {textToReverse: $("#stringToReverse").val() }
-				, function (data, status, jqxhr) {
+			("@Url.Action("ReverseText","Home")", { textToReverse: $("#stringToReverse").val() }, function(data, status, jqxhr) {
 					$("#stringReverseOutput").empty().append(data);
 				}
 			);
+		});
+
+		$("#xmlGetLanguages").click(function() {
+			$.get
+			("@Url.Action("LanguagesXml", "Home")", function(data) {
+				$("#xmlDocument").empty().append("Languages:<br>");
+				$(data).each(function(index, element) {
+					$("#xmlDocument").append(element).append("<br>");
+				});
+			});
 		});
 	});
 </script>
@@ -61,10 +69,13 @@
 	.bordered {
 		border: 2px solid black;
 	}
-
 	.spaced {
 		margin: 10px;
 		padding: 10px;
+	}
+	.floatingright {
+		float: right;
+		background-color: white;
 	}
 	table, td {
 		border: 1px solid black;
@@ -75,6 +86,11 @@
 	}
 </style>
 
+<div id="xmlDocument" class="bordered spaced floatingright">
+	<button id="xmlGetLanguages">Get XML Languages</button>
+</div>
+
+
 <div id="stringReverse" class="bordered spaced">
 	String reverse: 
 	<button id="reverseButton">Reverse String</button>
@@ -82,9 +98,8 @@
 	<br/>
 	Output: <span id="stringReverseOutput"></span>
 </div>
-<div id="xmlDocument">
-	Xml Document: <br/>
-</div>
+
+
 <div id="sqlSelects" class="bordered spaced">
 	Sql Selections: <br/>
 	<table cellpadding="0" cellspacing="0">
@@ -107,6 +122,8 @@
 		</tbody>
 	</table>
 </div>
+
+
 <div id="langModal">
 	<div id="modalTitle"></div>
 	<div id="modalContent"></div>

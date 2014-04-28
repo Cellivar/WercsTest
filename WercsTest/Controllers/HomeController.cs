@@ -13,6 +13,7 @@ namespace WercsTest.Controllers
 			// Could use an actual model, but for quick'n'dirty the ViewData
 			// will work just fine.
 			ViewData["sqlLanguages"] = LanguagesDal.GetLanguage(5);
+			ViewData["sqlXmlLanguages"] = LanguagesXmlDal.GetNames();
 			return View();
 		}
 
@@ -23,9 +24,9 @@ namespace WercsTest.Controllers
 		}
 
 		[HttpGet]
-		public ContentResult LanguagesXml()
+		public JsonResult LanguagesXml()
 		{
-			return null;
+			return Json(LanguagesXmlDal.GetNames(), JsonRequestBehavior.AllowGet);
 		}
 
 	}
