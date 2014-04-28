@@ -6,24 +6,40 @@
 }
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(function () {
+
+		// Reversing button ajax post
 		$("#reverseButton").click(function() {
 			$.post
 			("@Url.Action("ReverseText","Home")"
-			, {textToReverse: $("#stringToReverse").val() }
-			, function (data, status, jqxhr) {
-				$("#stringReverseOutput").empty().append(data);
-			}
+				, {textToReverse: $("#stringToReverse").val() }
+				, function (data, status, jqxhr) {
+					$("#stringReverseOutput").empty().append(data);
+				}
 			);
 		});
 	});
 </script>
+<style>
+	.bordered {
+		border: 2px solid black;
+	}
 
-<div id="stringReverse">
+	.spaced {
+		margin: 10px;
+		padding: 10px;
+	}
+</style>
+
+<div id="stringReverse" class="bordered spaced">
 	String reverse: 
 	<button id="reverseButton">Reverse String</button>
 	<input id="stringToReverse" value="My country ‘tis of thee."/>
 	<br/>
 	Output: <span id="stringReverseOutput"></span>
 </div>
+<div id="xmlDocument">
+	Xml Document: <br/>
+</div>
+<div id="sqlSelects"></div>
 
