@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using WercsTest.DAL
+@model dynamic
 
 @{
 	ViewBag.Title = "Wercs Test";
@@ -6,8 +7,44 @@
 }
 
 <script>
-	$(document).ready(function () {
+	// Not the best way to handle this, but it'll work for fast'n'dirty.
+	var LanguageData = @Html.Raw(Json.Encode(ViewData["sqlLanguages"]));
 
+	function ShowLanguageModal(langcode) {
+		if (langcode === "undefined") {
+			return null;
+		}
+
+		var languageObj = FindLanguage(langcode);
+		if (languageObj === null) {
+			return null;
+		}
+
+		$("#modalTitle").empty().append(languageObj["F_Language_Name"]);
+		// Gross, but bett
+		var modalContent = "";
+		for (var property in languageObj) {
+			modalContent += property + ": " + languageObj[property] + "<br>";
+		}
+		$("#modalContent").empty().append(modalContent);
+	}
+
+	function FindLanguage(langcode) {
+		if (langcode === "undefined") {
+			return null;
+		}
+
+		for (var i = 0, match = null; i < LanguageData.length; ++i) {
+			if (LanguageData[i]["F_Language"] === langcode) {
+				match = LanguageData[i];
+				break;
+			}
+		}
+
+		return match;
+	}
+
+	$(document).ready(function () {
 		// Reversing button ajax post
 		$("#reverseButton").click(function() {
 			$.post
@@ -29,6 +66,13 @@
 		margin: 10px;
 		padding: 10px;
 	}
+	table, td {
+		border: 1px solid black;
+		text-align: center;
+	}
+	th > td {
+		border: 1px solid black;
+	}
 </style>
 
 <div id="stringReverse" class="bordered spaced">
@@ -41,5 +85,29 @@
 <div id="xmlDocument">
 	Xml Document: <br/>
 </div>
-<div id="sqlSelects"></div>
-
+<div id="sqlSelects" class="bordered spaced">
+	Sql Selections: <br/>
+	<table cellpadding="0" cellspacing="0">
+		<thead>
+			<th>Language</th>
+			<th>2-letter</th>
+			<th></th>
+		</thead>
+		<tbody>
+			@foreach (T_Language language in (Array)ViewData["sqlLanguages"])
+			{
+				<tr>
+					<td>@language.F_Language_Name</td>
+					<td>@language.F_Language</td>
+					<td>
+						<button onclick="ShowLanguageModal('@language.F_Language')">More</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+<div id="langModal">
+	<div id="modalTitle"></div>
+	<div id="modalContent"></div>
+</div>

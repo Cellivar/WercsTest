@@ -10,6 +10,9 @@ namespace WercsTest.Controllers
 
 		public ActionResult Index()
 		{
+			// Could use an actual model, but for quick'n'dirty the ViewData
+			// will work just fine.
+			ViewData["sqlLanguages"] = LanguagesDal.GetLanguage(5);
 			return View();
 		}
 
@@ -17,12 +20,6 @@ namespace WercsTest.Controllers
 		public ContentResult ReverseText(string textToReverse)
 		{
 			return new ContentResult { Content = textToReverse.FancyStringReverse() };
-		}
-
-		[HttpGet]
-		public JsonResult Languages()
-		{
-			return Json(LanguagesDal.GetLanguage(5), JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpGet]
