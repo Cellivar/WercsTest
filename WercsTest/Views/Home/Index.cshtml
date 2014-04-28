@@ -1,18 +1,29 @@
 ﻿@model dynamic
 
 @{
-	Layout = null;
+	ViewBag.Title = "Wercs Test";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<script>
+	$(document).ready(function() {
+		$("#reverseButton").click(function() {
+			$.post
+			("@Url.Action("ReverseText","Home")"
+			, {textToReverse: $("#stringToReverse").val() }
+			, function (data, status, jqxhr) {
+				$("#stringReverseOutput").empty().append(data);
+			}
+			);
+		});
+	});
+</script>
 
-<html>
-	<head>
-		<title>WercsTest</title>
-	</head>
-	<body>
-		<div>
-			  It works!
-		</div>
-	</body>
-</html>
+<div id="stringReverse">
+	String reverse button: 
+	<button id="reverseButton">Reverse String</button>
+	<input id="stringToReverse" value="My country ‘tis of thee."/>
+	<br/>
+	Output: <span id="stringReverseOutput"></span>
+</div>
+
