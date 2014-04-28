@@ -20,13 +20,23 @@
 			return null;
 		}
 
-		$("#modalTitle").empty().append(languageObj["F_Language_Name"]);
+		$("#modalTitle").empty().append(languageObj["F_Language_Name"].toLowerCase());
 		// Gross, but bett
 		var modalContent = "";
 		for (var property in languageObj) {
-			modalContent += property + ": " + languageObj[property] + "<br>";
+			// Not the best way to build this, but it'll do for now.
+			modalContent += "<span class='modal-property'>";
+			modalContent += property.replace(/F_/g, "").replace(/_/g, " ").toLowerCase() + ": ";
+			modalContent += "</span>";
+			modalContent += languageObj[property] + "<br>";
 		}
 		$("#modalContent").empty().append(modalContent);
+		$("#langModal").css("display", "");
+		return;
+	}
+
+	function HideLanguageModal() {
+		$("#langModal").css("display", "none");
 	}
 
 	function FindLanguage(langcode) {
@@ -84,6 +94,29 @@
 	th > td {
 		border: 1px solid black;
 	}
+
+	.modal {
+		margin-top: -250px;
+		margin-left: -150px;
+		background-color: white;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+
+		padding: 10px;
+	}
+
+	.modal-property, .language-name {
+		text-transform: capitalize;
+	}
+
+	.modal-button {
+		text-align: center;
+	}
+
+	#modalCloseButton {
+		text-align: center;
+	}
 </style>
 
 <div id="xmlDocument" class="bordered spaced floatingright">
@@ -112,7 +145,7 @@
 			@foreach (T_Language language in (Array)ViewData["sqlLanguages"])
 			{
 				<tr>
-					<td>@language.F_Language_Name</td>
+					<td class="language-name">@language.F_Language_Name.ToLower()</td>
 					<td>@language.F_Language</td>
 					<td>
 						<button onclick="ShowLanguageModal('@language.F_Language')">More</button>
@@ -124,7 +157,10 @@
 </div>
 
 
-<div id="langModal">
-	<div id="modalTitle"></div>
+<div id="langModal" style="display:none" class="modal bordered">
+	<div id="modalTitle" class="language-name"></div>
 	<div id="modalContent"></div>
+	<div class="modal-button">
+		<button id="modalCloseButton" onclick="HideLanguageModal()">Close</button>
+	</div>
 </div>
