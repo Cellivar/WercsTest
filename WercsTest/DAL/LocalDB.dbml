@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LocalDB" Class="LocalDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\LocalDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LocalDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.T_Languages" Member="T_Languages">
+    <Type Name="T_Language">
+      <Column Name="F_Language" Type="System.String" DbType="VarChar(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="F_Language_Name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="F_Codepage" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="F_Date_Stamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="F_DATE_FORMAT" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="F_User_Updated" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="F_LCID" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="F_Special_Handling" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="F_Direction" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="F_TRANSLATION_SOURCE" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="F_RTF_ENCODING" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="F_HTML_ENCODING" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="F_RTF_CODEPAGE" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="F_RTF_FONT_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
