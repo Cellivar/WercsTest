@@ -32,7 +32,6 @@
 		}
 		$("#modalContent").empty().append(modalContent);
 		$("#langModal").css("display", "");
-		return;
 	}
 
 	function HideLanguageModal() {
@@ -69,7 +68,7 @@
 			("@Url.Action("LanguagesXml", "Home")", function(data) {
 				$("#xmlDocument").empty().append("Languages:<br>");
 				$(data).each(function(index, element) {
-					$("#xmlDocument").append(element).append("<br>");
+					$("#xmlDocument").append(element.toLowerCase()).append("<br>");
 				});
 			});
 		});
@@ -83,16 +82,13 @@
 		margin: 10px;
 		padding: 10px;
 	}
-	.floatingright {
+	.floating-right {
 		float: right;
 		background-color: white;
 	}
 	table, td {
 		border: 1px solid black;
 		text-align: center;
-	}
-	th > td {
-		border: 1px solid black;
 	}
 
 	.modal {
@@ -106,12 +102,14 @@
 		padding: 10px;
 	}
 
-	.modal-property, .language-name {
+	.modal-property {
 		text-transform: capitalize;
-	}
+		font-weight: bold;
 
-	.modal-button {
-		text-align: center;
+	}
+	
+	.language-name {
+		text-transform: capitalize;
 	}
 
 	#modalCloseButton {
@@ -119,7 +117,7 @@
 	}
 </style>
 
-<div id="xmlDocument" class="bordered spaced floatingright">
+<div id="xmlDocument" class="bordered spaced floating-right language-name">
 	<button id="xmlGetLanguages">Get XML Languages</button>
 </div>
 
